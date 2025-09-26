@@ -1,0 +1,24 @@
+# Node / tooling
+node_modules/
+npm-debug.log*
+yarn.lock
+pnpm-lock.yaml
+
+# Build / cache
+dist/
+build/
+.cache/
+.tmp/
+
+# Env / credenciales
+.env
+.env.*
+!.env.example
+
+# Editor
+.vscode/
+.DS_Store
+
+# Front
+public/*.map
+public/css/*.map
