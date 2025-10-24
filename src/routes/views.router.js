@@ -5,18 +5,24 @@ import __dirname from '../utils.js';
 const router = Router();
 
 /* HOME PAGE */
-router.get('/', (req, res) => {
+router.get('/', (_req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 /* LOGIN */
-router.get('/login', (req, res) => {
+router.get('/login', (_req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'pages/login.html'));
 });
 
 /* REGISTER */
-router.get('/register', (req, res) => {
+router.get('/register', (_req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'pages/register.html'));
 });
+
+/* HOME */
+router.get('/home', (_req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'pages/home.html'));
+})
+
 
 export default router;
