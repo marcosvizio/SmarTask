@@ -1,0 +1,204 @@
+@charset "UTF-8";
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Sora", sans-serif;
+}
+
+/* ==== PAGINA INDEX ==== */
+.body-index {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #f6f6fc;
+  /* HEADER */
+  /* MAIN */
+  /* FEATURES */
+  /* FOOTER */
+}
+.body-index .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  background: #fff;
+  border-bottom: 1px solid #e0e0e0;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+}
+.body-index .header-cont {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.body-index .header .logo {
+  font-size: 20px;
+  font-weight: bold;
+  color: #4a3aff;
+}
+.body-index .header .nav ul {
+  display: flex;
+  list-style: none;
+  gap: 20px;
+}
+.body-index .header .nav a {
+  text-decoration: none;
+  color: #444;
+  font-weight: 500;
+}
+.body-index .header .btn {
+  padding: 8px 16px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+}
+.body-index .header .btn-outline {
+  background: transparent;
+  color: #4a3aff;
+}
+.body-index .header .btn-primary {
+  background: #4a3aff;
+  color: #fff;
+}
+.body-index .main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 80px;
+  padding: 40px;
+  align-items: flex-start;
+  padding: 60px 40px 40px;
+}
+.body-index .main .text h1 {
+  font-size: 32px;
+  margin-bottom: 20px;
+  font-size: bold;
+}
+.body-index .main .text p {
+  font-size: 18px;
+  color: #555;
+}
+.body-index .main .formulario {
+  background: #fff;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+  width: 300px;
+}
+.body-index .main .formulario h2 {
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+.body-index .main .formulario input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+.body-index .main .formulario .btn {
+  padding: 8px 16px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+}
+.body-index .main .formulario .btn-primary {
+  background: #4a3aff;
+  color: #fff;
+  width: 100%;
+  margin-bottom: 10px;
+}
+.body-index .main .formulario .btn-google {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #fff;
+  cursor: pointer;
+  margin-bottom: 1.2rem;
+}
+.body-index .features {
+  padding: 60px 0;
+  text-align: center;
+}
+.body-index .features-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 30px;
+  justify-items: center;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.body-index .features img {
+  width: 210px;
+  height: 300px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  margin-bottom: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+  display: block;
+}
+.body-index .features h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+  color: #111827;
+}
+.body-index .site-footer {
+  background: var(--bg, #f5f6ff);
+  position: relative;
+  margin-top: 40px;
+  padding: 40px 0;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #f5f6ff;
+  padding: 20px 0;
+  z-index: 100;
+}
+.body-index .site-footer::after, .body-index .site-footer::before {
+  content: "";
+  display: block;
+  height: 1px;
+  background: rgba(15, 23, 42, 0.08);
+}
+.body-index .footer-inner {
+  max-width: 960px;
+  margin: 0 auto;
+}
+.body-index .social {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 28px; /* separación entre íconos */
+  padding: 18px 0; /* espacio entre las líneas */
+}
+.body-index .social a {
+  width: 25px; /* tamaño del “botón” */
+  height: 25px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+.body-index .social a :hover {
+  transform: translateY(-2px);
+}
+.body-index .social img {
+  width: 30px; /* tamaño del ícono */
+  height: 30px;
+  display: block;
+}/*# sourceMappingURL=index.css.map */

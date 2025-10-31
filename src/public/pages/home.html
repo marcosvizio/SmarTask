@@ -4,126 +4,168 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home SmarTask</title>
-    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/home.css">
 </head>
 <body>
-    <header class="encabezado">
-      <div class="logo-contenedor">
-        <img src="Nuestro Logo.png" alt="Logo" class="logo">
-        <span class="titulo">SmarTask</span>
-      </div>
-
-
-      <div class="perfil">
-        <img src="icono de perfl.jpg" alt="Perfil" class="icono-perfil">
-      </div>
-    </header>
-
-
-    
-    <main>
-      <section class="notificaciones">
-      <h2>NOTIFICACIONES</h2>
-      
-      <div class="noti tp">
-        <div class="circulo"></div>
-        <div class="contenido">
-          <strong>TP</strong> Entrega 1 PP2
-        </div>
-        <div class="bandera"></div>
-      </div>
-
-      
-      <div class="noti investigacion">
-        <div class="circulo"></div>
-        <div class="contenido">
-          <strong>Investigacion</strong><br>
-          Tengo una duda, us...
-        </div>
-        <div class="bandera"></div>
-      </div>
-
-
-      <div class="noti ux">
-        <div class="circulo"></div>
-        <div class="contenido">
-          <strong>UX diseño</strong><br>
-          En progreso por Alu...
-
-          </div>
-        <div class="bandera"></div>
-      </div>
-
-
-      <div class="noti ui">
-        <div class="circulo"></div>
-        <div class="contenido">
-          <strong>UI diseño</strong> ¡Listo!
-        </div>
-        <div class="bandera"></div>
-      </div>
-
-
-      <div class="noti data">
-        <div class="circulo"></div>
-        <div class="contenido">
-          <strong>Diseño data</strong><br>
-          Listo, pero fíjense q...
-        </div>
-        <div class="bandera"></div>
-      </div>
-      <br>
-      <br>
-
-     <div class="botones">
-       <button class="btn limpiar">Limpiar</button>
-       <button class="btn anteriores">Anteriores</button>
-     </div>
-     </section>
-
-
-     <section class="calendario">
-      <h2>CALENDARIO</h2>
-     </section>
-
-
-  <!-- CONTENEDOR TABLERO -->
-  <section class="tablero">
-    <h2>TABLERO</h2>
-
-    <div class="cards">
-      <!-- ÚNICA TARJETA -->
-      <article class="card card-info">
-        <header class="card-head">
-          <h3>Tarea 1</h3>
-          <span class="pin" aria-hidden="true"></span>
-        </header>
-
-        <p class="card-text">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque sodales
-          magna ac orci rutrum dictum.
-        </p>
-
-        <div class="status info">
-          <span class="icon"></span>
-          <div class="status-text">
-            <strong>Status</strong><br>
-            <small>Status</small>
-          </div>
-        </div>
-      </article>
+  <!-- HEADER -->
+  <header class="encabezado">
+    <div class="logo-contenedor">
+      <img src="../img/smartask_logo.png" alt="Logo" class="logo">
+      <span class="titulo">SmarTask</span>
     </div>
-  </section>
-    </main>
+    <div class="perfil">
+      <img src="../img/icono_perfil.jpg" alt="Perfil" class="icono-perfil">
+    </div>
+  </header>
+    
+  <!-- MAIN -->
+  <main>
+    <!-- CONTENEDOR NOTIFICACIONES -->
+    <section id="sec-noti" class="notificaciones hidden">
+
+      <h2>NOTIFICACIONES</h2>
+
+      <div id="notif-list" class="noti">
+      </div>
+
+      <div class="botones">
+        <button class="btn limpiar">Limpiar</button>
+        <button class="btn anteriores">Anteriores</button>
+      </div>
+
+    </section>
+
+    <!-- CONTENEDOR CALENDARIO -->
+    <section id="sec-calendario" class="calendario hidden">
+      <h2>CALENDARIO</h2>
+    </section>
+
+    <!-- CONTENEDOR TABLERO -->
+    <section id="sec-tablero" class="tablero">
+      <div class="tablero-header">
+        <h2>TABLERO</h2>
+        <button id="btnNewTask" class="btn new-task" type="button">+ Nueva tarea</button>
+
+        <!-- MODAL TAREA -->
+        <div id="taskModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="taskTitleLabel">
+          <div class="modal-backdrop"></div>
+
+          <div class="modal-content">
+            <header class="modal-head">
+              <h3 id="taskTitleLabel">Nueva tarea</h3>
+              <button id="closeModal" class="close" aria-label="Cerrar">×</button>
+            </header>
+
+            <form id="taskForm" class="modal-content_form">
+
+              <label>
+                Título
+                <input name="title" id="taskTitle" placeholder="Ej: Armar reporte" required />
+              </label>
+
+              <label>
+                Descripción
+                <textarea name="description" id="taskDesc" rows="3" placeholder="Detalles breves…"></textarea>
+              </label>
+
+              <label>
+                Fecha de inicio
+                <input type="date" name="fecha_inicio" id="taskStartDate" required/>
+              </label>
+
+              <label>
+                Fecha de vencimiento
+                <input type="date" name="fecha_vencimiento" id="taskDueDate" required/>
+              </label>
+
+              <label>
+                Prioridad
+                <select name="prioridad" id="taskPriority" required>
+                  <option value="" disabled selected>Seleccione prioridad</option>
+                  <option value="Baja">Baja</option>
+                  <option value="Media">Media</option>
+                  <option value="Alta">Alta</option>
+                </select>
+              </label>
+
+              <div class="modal-content_form-actions">
+                <button type="button" id="cancelModal" class="btn secondary">Cancelar</button>
+                <button type="submit" class="btn primary">Guardar</button>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+      <!-- FIN MODAL TAREA -->
+
+      <!-- MODAL NOTIFICACION -->
+      <div id="notif-modal" class="modal hidden">
+        <div class="modal-dialog">
+          <div class="modal-header">
+            <h3>Configurar notificación</h3>
+            <button id="notif-close" class="icon-btn" aria-label="Cerrar">✕</button>
+          </div>
+
+          <form id="notif-form">
+            <input type="hidden" name="taskId" id="notif-taskId">
+
+            <label class="field">
+              <span>Asunto</span>
+              <input type="text" id="notif-asunto" name="asunto" required>
+            </label>
+
+            <label class="field">
+              <span>Mensaje</span>
+              <textarea id="notif-mensaje" name="mensaje" rows="3" required></textarea>
+            </label>
+
+            <label class="field">
+              <span>Fecha de envío</span>
+              <!-- datetime-local espera hora local -->
+              <input type="datetime-local" id="notif-fecha" name="fecha_envio" required>
+            </label>
+
+            <label class="field">
+              <span>Canal</span>
+              <select id="notif-canal" name="canal">
+                <option value="APP">APP</option>
+                <option value="EMAIL">EMAIL</option>
+                <option value="PUSH">PUSH</option>
+              </select>
+            </label>
+
+            <div class="modal-actions">
+              <button type="submit" class="btn primary">Guardar</button>
+              <button type="button" id="notif-delete" class="btn danger">Eliminar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <!-- FIN MODAL NOTIFICACION -->
+
+       
+      <div id="cards" class="cards">
+        
+      </div>
 
 
+      
+    </section>
+  </main>
 
-    <footer class="footer">
+
+  <!-- PESTAÑAS TABLERO NOTIFICACIONES CALENDARIO -->
+  <footer class="footer">
         <nav class="footer-actions">
-            <a href="#" class="btn-footer">Notificaciones</a>
-            <a href="#" class="btn-footer">Calendario</a>
-            <a href="#" class="btn-footer">Tablero</a>
+            <button id="btn-noti" class="btn-footer">Notificaciones</button>
+            <button id="btn-calend" class="btn-footer">Calendario</button>
+            <button id="btn-tablero" class="btn-footer">Tablero</button>
         </nav>
-    </footer>
+  </footer>
+
+
+
+  <script type="module" src="../js/home.js" defer></script>
 </body>
 </html>

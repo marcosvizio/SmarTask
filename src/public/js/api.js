@@ -16,22 +16,34 @@ export async function api(path, { method='GET', headers={}, body } = {}) {
 
   const res = await fetch(path, opts);
   if (!res.ok) {
-    // intenta parsear error
+    // Intenta parsear error
     let err = {};
     try { err = await res.json(); } catch {}
     throw new Error(err.error || `${res.status} ${res.statusText}`);
   }
   // si no hay contenido, devuelve null
-  try { return await res.json(); } catch { return null; }
+  try { 
+    return await res.json(); 
+  } 
+  catch { 
+    return null; 
+  }
 }
 
-// Endpoints concretos
-export const login = (email, password) =>
-  api('/api/users/login', { method: 'POST', body: { email, password } });
-
+// === LOGIN Y REGISTER ===
+export const login = (email, password) => api('/api/users/login', { method: 'POST', body: { email, password } });
+export const register = (first_name, last_name, birthday, email, phone_number, password) => api('/api/users/register', { method: 'POST', body: { first_name, last_name, birthday, email, phone_number, password } });
 export const me = () => api('/api/users/me');
 
-export const listTasks = () => api('/api/tasks');
-export const createTask = (title) => api('/api/tasks', { method: 'POST', body: { title } });
+// === TASKS ===
+export const listTasks = () => api('/api/tasks/');
+export const createTask = (title, description, fecha_inicio, fecha_vencimiento, prioridad) => api('/api/tasks/', { method: 'POST', body: { title, description, fecha_inicio, fecha_vencimiento, prioridad } });
 export const updateTask = (id, patch) => api(`/api/tasks/${id}`, { method: 'PUT', body: patch });
 export const deleteTask = (id) => api(`/api/tasks/${id}`, { method: 'DELETE' });
+
+// === NOTIFICATIONS ===
+export const getNotification = (taskId) => api(`/api/notifications/${taskId}`, {method: 'GET'});
+export const createNotification = (taskId, asunto, mensaje, fecha_envio, canal) => api(`/api/notifications/`, {method: 'POST', body: {taskId, asunto, mensaje, fecha_envio, canal}});
+
+export const updateNotification = (taskId, {asunto, mensaje, fecha_envio, canal}) => api(`/api/notifications/${taskId}`, {method: 'POST', body: {asunto, mensaje, fecha_envio, canal} });
+export const deleteNotification = (taskId) => api(`/api/notifications/${taskId}`, {method: 'DELETE'})

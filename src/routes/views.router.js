@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import path from 'path';
 import __dirname from '../utils.js';
+import authPage from '../middlewares/authPage.js';
 
 const router = Router();
 
@@ -20,7 +21,7 @@ router.get('/register', (_req, res) => {
 });
 
 /* HOME */
-router.get('/home', (_req, res) => {
+router.get('/home', authPage, (_req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'pages/home.html'));
 })
 

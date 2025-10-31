@@ -8,7 +8,7 @@ export default function auth(req, res, next) {
     const token = h.startsWith('Bearer ') ? h.slice(7) : null;
 
     if (!token) return res.status(401).json({ 
-        error: 'no token' 
+        error: 'no token'
     });
 
     try { 

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SmarTask - Registro</title>
     <!-- CSS -->
-    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./css/login.css">
     <!-- GOOGLE FONT -->
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600&display=swap" rel="stylesheet">
 </head>
@@ -29,7 +29,13 @@
 
                 <form>
 
-                    <input type="email" placeholder="Correo electrónico" required/>
+                    <span id="msg" class="msg"></span>
+                    <input type="text" name="first_name" placeholder="Nombre" required/>
+                    <input type="text" name="last_name" placeholder="Apellido" required/>
+                    <input type="date" name="birthday" required>
+                    <input type="email" name="email" placeholder="Correo electrónico" required/>
+                    <input type="tel" name="phone_number" placeholder="Número de teléfono" required/>
+                    <input type="password" name="password" placeholder="Contraseña" required/>
                     <button class="btn-sig">Continuar</button>
 
                 </form>
@@ -43,5 +49,6 @@
         <!-- IMAGEN MITAD -->
         <div class="img-log"></div>
     </div>
+    <script type="module" src="../js/register.js"></script>
 </body>
 </html>
