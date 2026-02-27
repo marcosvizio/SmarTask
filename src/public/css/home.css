@@ -25,7 +25,7 @@ body .encabezado {
   background-color: #050019;
   padding: 10px 20px;
   border-bottom: 1px solid #666;
-  height: 100%; /* <-- altura fija del header */
+  height: 100%;
   box-sizing: border-box;
 }
 body .encabezado .logo-contenedor {
@@ -42,6 +42,13 @@ body .encabezado .logo-contenedor .titulo {
   font-size: 22px;
   font-weight: bold;
 }
+body .encabezado .logo-contenedor .titulo a {
+  color: inherit;
+  text-decoration: none;
+}
+body .encabezado .logo-contenedor .titulo a:hover {
+  text-decoration: underline;
+}
 body .encabezado .perfil {
   display: flex;
   align-items: center;
@@ -55,6 +62,64 @@ body .encabezado .perfil .icono-perfil {
      object-fit: cover;
   cursor: pointer;
 }
+body .encabezado .perfil .dropdown-menu {
+  position: absolute;
+  top: 70px;
+  right: 20px;
+  width: 240px;
+  background-color: #2b2e45;
+  border-radius: 12px;
+  padding: 16px;
+  display: none;
+  flex-direction: column;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  gap: 14px;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: 0.2s ease;
+  z-index: 100;
+}
+body .encabezado .perfil .dropdown-menu.show {
+  display: flex;
+  opacity: 1;
+  transform: translateY(0);
+}
+body .encabezado .perfil .dropdown-menu .datos {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+body .encabezado .perfil .dropdown-menu .datos .nombre {
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+}
+body .encabezado .perfil .dropdown-menu .datos .mail {
+  font-size: 13px;
+  color: #b5b8d6;
+}
+body .encabezado .perfil .dropdown-menu .divider {
+  border: none;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  margin: 12px 0;
+}
+body .encabezado .perfil .dropdown-menu a, body .encabezado .perfil .dropdown-menu button {
+  text-align: left;
+  padding: 6px 0;
+  font-size: 14px;
+  color: #e6e6f0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: 0.2s ease;
+  text-decoration: none;
+}
+body .encabezado .perfil .dropdown-menu a:hover, body .encabezado .perfil .dropdown-menu button:hover {
+  color: #7b83eb;
+  transform: translateX(4px);
+}
 
 main {
   display: flex;
@@ -62,15 +127,19 @@ main {
   justify-content: center;
   padding: 20px;
   gap: 20px;
-  flex-wrap: nowrap; /* Asegura que en pantallas pequeñas se acomoden uno debajo del otro */
+  flex-wrap: nowrap;
 }
 main .notificaciones {
   background-color: #0f1026;
-  width: 15%;
+  width: 25%;
   padding: 20px;
   border-radius: 12px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
   color: #fff;
+  display: flex;
+  flex-direction: column;
+  max-height: 80vh;
+  overflow-y: auto;
 }
 main .notificaciones h2 {
   font-size: 14px;
@@ -80,13 +149,53 @@ main .notificaciones h2 {
 }
 main .notificaciones .noti {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  flex-direction: column;
+  gap: 10px;
   padding: 10px;
   border-radius: 8px;
-  margin-bottom: 10px;
   font-size: 13px;
   color: white;
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 6px;
+}
+main .notificaciones .noti .cards-noti {
+  background-color: #1f2a66;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 13px;
+  color: white;
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+}
+main .notificaciones .noti .cards-noti_header {
+  margin-bottom: 6px;
+}
+main .notificaciones .noti .cards-noti_header h3 {
+  font-size: 14px;
+  font-weight: 600;
+}
+main .notificaciones .noti .cards-noti_texto {
+  padding: 10px 15px 10px 0px;
+  font-size: 12px;
+  opacity: 0.9;
+}
+main .notificaciones .noti .cards-noti .btn {
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+}
+main .notificaciones .noti .cards-noti .btn.secondary {
+  background-color: #e04b4b;
+  color: white;
+}
+main .notificaciones .noti .cards-noti .btn.secondary:hover {
+  transform: scale(1.1);
+  transition-duration: 0.3s;
+}
+main .notificaciones .noti .cards-noti .actions {
+  margin-top: 20px;
 }
 main .notificaciones .noti .circulo {
   width: 10px;
@@ -131,7 +240,7 @@ main .notificaciones .botones .btn.anteriores:hover {
 }
 main .calendario {
   background-color: #0f1026;
-  width: 25%;
+  width: 50%;
   padding: 20px;
   border-radius: 12px;
   color: #fff;
@@ -143,15 +252,15 @@ main .calendario h2 {
   letter-spacing: 1px;
 }
 main .tablero {
-  background-color: #1f2a66; /* fondo tipo “board” */
+  background-color: #1f2a66;
   width: 100%;
   padding: 18px;
   border-radius: 12px;
   color: #fff;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
-  outline: 2px solid rgba(150, 160, 220, 0.25); /* borde suave como en la imagen */
+  outline: 2px solid rgba(150, 160, 220, 0.25);
   overflow-y: auto;
-  max-height: 80vh; /* altura máxima para que no crezca demasiado */
+  max-height: 80vh;
 }
 main .tablero h2 {
   font-size: 14px;
@@ -167,87 +276,232 @@ main .tablero .cards {
 }
 main .tablero .cards .card {
   background: #0f1026;
-  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  border: 1px solid #FFFFFF;
   border-radius: 16px;
-  padding: 14px;
-  width: 260px; /* tamaño aproximado de la UI */
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.35);
+  width: 260px;
+  box-shadow: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
-main .tablero .cards .card .actions .btn {
-  border: none;
-  padding: 8px 14px;
-  border-radius: 6px;
-  margin-top: 8px;
-  font-size: 13px;
-  cursor: pointer;
-}
-main .tablero .cards .card .actions .btn.mark {
-  background-color: #428f4f;
-  color: rgb(255, 255, 255);
-}
-main .tablero .cards .card .actions .btn.mark:hover {
-  transform: scale(1.1);
-  transition: 0.3s;
-}
-main .tablero .cards .card .actions .btn.del {
-  background-color: #e04b4b;
-  color: rgb(255, 255, 255);
-}
-main .tablero .cards .card .actions .btn.del:hover {
-  transform: scale(1.1);
-  transition: 0.3s;
+main .tablero .cards .card .card-pad {
+  padding: 16px;
 }
 main .tablero .cards .card .card-head {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  margin-bottom: 8px;
-}
-main .tablero .cards .card .card-head .pin {
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  border: 2px solid rgba(255, 255, 255, 0.35);
-  display: inline-block;
-  opacity: 0.7;
+  align-items: center;
 }
 main .tablero .cards .card .card-head h3 {
   font-size: 15px;
-  font-weight: 700;
+  font-weight: 600;
+  color: #ffffff;
+}
+main .tablero .cards .card .card-head .btn-ghost {
+  background: transparent;
+  border: 1px solid #FFFFFF;
+  color: #ffffff;
+  padding: 4px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+main .tablero .cards .card .card-head .btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.08);
 }
 main .tablero .cards .card .card-text {
+  font-size: 13px;
   color: #d9d9e6;
-  font-size: 14px;
-  line-height: 1.35;
-  margin-bottom: 12px;
+  line-height: 1.4;
+}
+main .tablero .cards .card .card-text.description {
+  margin-bottom: 8px;
+}
+main .tablero .cards .card .p-red {
+  color: #FD9BA7;
+  font-weight: 600;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+main .tablero .cards .card .p-yellow {
+  color: #C0ED78;
+  font-weight: 600;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+main .tablero .cards .card .p-green {
+  color: #88D4FC;
+  font-weight: 600;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 main .tablero .cards .card .status {
+  padding: 15px 18px;
+  border-top: 3px solid;
+  border-radius: 8px;
+  font-size: 13px;
   display: flex;
-  align-items: center;
-  gap: 10px;
-  border-top: 2px solid rgba(255, 255, 255, 0.2);
-  padding: 10px 8px 8px;
-  border-bottom-left-radius: 14px;
-  border-bottom-right-radius: 14px;
+  flex-direction: column;
 }
-main .tablero .cards .card .status .icon {
-  font-size: 18px;
-  line-height: 1;
+main .tablero .cards .card .status strong {
+  font-size: 14px;
+  letter-spacing: 0.5px;
 }
-main .tablero .cards .card .status .status-text strong {
-  font-weight: 800;
-  color: #a9d9ff;
-}
-main .tablero .cards .card .status .status-text small {
-  color: #7fbde6;
+main .tablero .cards .card .status small {
+  font-size: 15px;
+  font-weight: 500;
 }
 main .tablero .cards .card .status.info {
-  background: linear-gradient(to bottom, rgba(10, 70, 110, 0.55), rgba(8, 45, 70, 0.6));
-  border-top-color: rgba(61, 165, 219, 0.6);
+  border-color: #9333EA;
+  background: rgba(147, 51, 234, 0.2);
+}
+main .tablero .cards .card .status.info strong,
+main .tablero .cards .card .status.info small {
+  color: #D3AEF4;
 }
 main .tablero .cards .card .status.ok {
-  background: linear-gradient(to bottom, rgba(10, 70, 40, 0.55), rgba(8, 45, 30, 0.6));
-  border-top-color: rgba(61, 219, 165, 0.6);
+  border-color: #0284C7;
+  background: rgba(2, 132, 199, 0.2);
+}
+main .tablero .cards .card .status.ok strong,
+main .tablero .cards .card .status.ok small {
+  color: #88D4FC;
+}
+main .tablero .cards .card .actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+}
+main .tablero .cards .card .actions .btn {
+  flex: 1;
+  padding: 8px;
+  border-radius: 8px;
+  background: transparent;
+  color: #FFFFFF;
+  font-size: 13px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+main .tablero .cards .card .actions .btn.mark {
+  background: #5961d6;
+  color: #ffffff;
+  border: none;
+}
+main .tablero .cards .card .actions .btn:hover {
+  background: #737cff;
+}
+main .tablero .cards .card .actions .btn.del {
+  border: 1px solid #FFFFFF;
+  border-color: #7b83eb;
+  color: #7b83eb;
+}
+main .tablero .cards .card .actions .btn.del:hover {
+  color: #ffffff;
+  border-color: rgb(255, 255, 255);
+  background: rgba(255, 255, 255, 0.15);
+}
+main .tablero .cards {
+  /* .card {
+    background: #0f1026;
+    border: 1.5px solid rgba(255,255,255,0.35);
+    border-radius: 16px;
+    padding: 14px;
+    width: 260px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.35);
+    .actions{
+      .btn{
+        border: none;
+        padding: 8px 14px;
+        border-radius: 6px;
+        margin-top: 8px;
+        font-size: 13px;
+        cursor: pointer;
+        &.mark{
+          background-color: #428f4f;
+          color: rgb(255, 255, 255);
+          &:hover {
+            transform: scale(1.1);
+            transition: 0.3s;
+          }
+        }
+        &.del{
+          background-color: #e04b4b;
+          color: rgb(255, 255, 255);
+          &:hover {
+            transform: scale(1.1);
+            transition: 0.3s;
+          }
+        }
+      }
+    }
+    .card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      .btn-ghost{
+        background: transparent;
+        border: 1px solid rgba(255,255,255,0.35);
+        color: #d9d9e6;
+        padding: 4px 10px;
+        border-radius: 6px;
+        font-size: 12px;
+        cursor: pointer;
+        &:hover {
+          background-color: rgba(255,255,255,0.1);
+          transform: scale(1.05);
+          transition-duration: 0.3s;
+        }
+      }
+      .pin {
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        border: 2px solid rgba(255,255,255,0.35);
+        display: inline-block;
+        opacity: 0.7;
+      }
+      & h3 {
+        font-size: 15px;
+        font-weight: 700;
+      }
+    }
+    .card-text {
+      color: #d9d9e6;
+      font-size: 14px;
+      line-height: 1.35;
+      margin-bottom: 12px;
+    }
+    .status {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-top: 2px solid rgba(255,255,255,0.2);
+      padding: 10px 8px 8px;
+      border-bottom-left-radius: 14px;
+      border-bottom-right-radius: 14px;
+      .icon{
+        font-size: 18px;
+        line-height: 1;
+      }
+      .status-text {
+        & strong {
+          font-weight: 800;
+          color: #a9d9ff;
+        }
+        & small {
+          color: #7fbde6;
+        }
+      }
+      &.info{
+        background: linear-gradient(to bottom, rgba(10,70,110,0.55), rgba(8,45,70,0.6));
+        border-top-color: rgba(61,165,219,0.6);
+      }
+      &.ok{
+        background: linear-gradient(to bottom, rgba(10,70,40,0.55), rgba(8,45,30,0.6));
+        border-top-color: rgba(61,219,165,0.6);
+      }
+    }
+  } */
 }
 main .tablero .tablero-header {
   display: flex;
@@ -329,24 +583,30 @@ main .tablero .tablero-header .btn.primary:hover {
   background-color: #c162ff;
 }
 
-/* --- Responsive para que los tres contenedores se acomoden bien en mobile --- */
+/* --- RESPONSIVE MOBILE --- */
 @media (max-width: 980px) {
   main {
     flex-wrap: wrap;
   }
-  .tablero, .calendario, .notificaciones {
+  main .notificaciones {
+    width: 100%;
+    max-height: 80vh;
+  }
+  main .tablero {
+    width: 100%;
+  }
+  main .calendario {
     width: 100%;
   }
   .tablero .cards {
     justify-items: start;
   }
 }
-/* Oculto por defecto */
+/* MODAL */
 .hidden {
   display: none !important;
 }
 
-/* Contenedor del modal */
 .modal {
   position: fixed;
   inset: 0;
@@ -355,17 +615,14 @@ main .tablero .tablero-header .btn.primary:hover {
   z-index: 1000;
 }
 
-/* Fondo difuminado */
 .modal-backdrop {
   position: absolute;
   inset: 0;
   background: rgba(0, 0, 0, 0.55);
-  -webkit-backdrop-filter: blur(2px);
-          backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
   z-index: 0;
 }
 
-/* Contenido del modal */
 .modal-content {
   position: relative;
   display: flex;
@@ -414,6 +671,16 @@ main .tablero .tablero-header .btn.primary:hover {
   align-items: center;
   margin-bottom: 12px;
 }
+.modal-head .close {
+  background: transparent;
+  border: none;
+  color: #cfcfe4;
+  font-size: 18px;
+  cursor: pointer;
+}
+.modal-head .close:hover {
+  color: #7b83eb;
+}
 
 .modal-actions {
   display: flex;
@@ -454,8 +721,11 @@ main .tablero .tablero-header .btn.primary:hover {
   font-weight: 600;
 }
 
-/* ESTILOS FOOTER (arreglar despues) */
-.footer {
+/* FOOTER DESKTOP */
+.footer-mobile {
+  display: none;
+}
+.footer-desktop {
   position: fixed;
   left: 0;
   right: 0;
@@ -465,8 +735,7 @@ main .tablero .tablero-header .btn.primary:hover {
   border-top: 1px solid #2a275a;
   padding: 12px 14px;
 }
-
-.footer-actions {
+.footer-desktop .footer-actions {
   max-width: 980px; /* ancho máximo cómodo */
   margin: 0 auto;
   display: flex;
@@ -475,44 +744,120 @@ main .tablero .tablero-header .btn.primary:hover {
   gap: 12px;
   flex-wrap: wrap; /* permite saltar de línea en pantallas chicas */
 }
-
-.btn-footer {
-  flex: 1 1 150px; /* ocupa 1/3 aprox; puede bajar a otra línea */
-  max-width: 320px; /* evita que se estiren demasiado en desktop grande */
+.footer-desktop .btn-footer {
+  flex: 1 1 150px;
+  max-width: 320px;
   text-align: center;
-  text-decoration: none;
-  color: #eaf6ff;
-  background: var(--btn);
   padding: 6px 14px;
   border-radius: 16px;
-  box-shadow: 0 4px 0 var(--btn-shadow), 0 0 0 2px rgba(123, 131, 235, 0.3) inset;
-  border: 1px solid rgba(255, 255, 255, 0.2);
   font-weight: 600;
-  letter-spacing: 0.2px;
   font-size: 16px;
-  transition: transform 0.08s ease, box-shadow 0.08s ease, filter 0.2s ease;
+  letter-spacing: 0.2px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  /* 🔹 NO SELECCIONADO | REPOSO */
+  background-color: #333455;
+  border: 1px solid #6A6B84;
+  color: #D9D9D9;
+  /* 🔹 NO SELECCIONADO | HOVER */
+}
+.footer-desktop .btn-footer:hover {
+  background-color: #1E1F3B;
+  border-color: #6A6B84;
+  color: #D9D9D9;
+}
+.footer-desktop .btn-footer {
+  /* 🔹 SELECCIONADO | REPOSO */
+}
+.footer-desktop .btn-footer.active {
+  background-color: #075985;
+  border: 1px solid #38BDF8;
+  color: #38BDF8;
+}
+.footer-desktop .btn-footer {
+  /* 🔹 SELECCIONADO | HOVER */
+}
+.footer-desktop .btn-footer.active:hover {
+  background-color: #1A81B9;
+  border-color: #89D5F7;
+  color: #89D5F7;
+}
+.footer-desktop-mobile {
+  display: none; /* se muestra solo en mobile */
 }
 
-.btn-footer:hover {
-  filter: brightness(1.07);
-}
-
-.btn-footer:active {
-  transform: translateY(2px);
-  box-shadow: 0 2px 0 var(--btn-shadow), 0 0 0 2px rgba(123, 131, 235, 0.3) inset;
-}
-
+/* FOOTER MOBILE */
 @media (max-width: 480px) {
-  .footer {
-    padding: 8px 10px calc(8px + env(safe-area-inset-bottom));
+  .footer-desktop {
+    display: none;
   }
-  .footer-actions {
+  .footer-mobile {
+    display: block;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 20;
+    background: #050019;
+    border-top: 1px solid #2a275a;
+    padding: 8px 10px calc(8px + env(safe-area-inset-bottom)); /* espacio para notch */
+  }
+  .footer-mobile .footer-actions {
+    max-width: none;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
     gap: 10px;
   }
-  .btn-footer {
-    flex: 1 1 100%;
-    max-width: 100%;
-    padding: 10px 12px;
+  .footer-mobile .footer-actions .btn-footer {
+    width: 56px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
     border-radius: 14px;
+    transition: all 0.15s ease;
+    /* 🔹 NO SELECCIONADO | REPOSO */
+    background-color: #333455;
+    border: 1px solid #6A6B84;
   }
+  .footer-mobile .footer-actions .btn-footer img {
+    opacity: 0.8;
+    transition: 0.15s ease;
+  }
+  .footer-mobile .footer-actions .btn-footer {
+    /* 🔹 SELECCIONADO | REPOSO */
+  }
+  .footer-mobile .footer-actions .btn-footer:active {
+    background-color: #1E1F3B;
+    transform: scale(0.95);
+  }
+  .footer-mobile .footer-actions .btn-footer {
+    /* 🔹 SELECCIONADO */
+  }
+  .footer-mobile .footer-actions .btn-footer.active {
+    background-color: #075985;
+    border: 1px solid #38BDF8;
+  }
+  .footer-mobile .footer-actions .btn-footer.active img {
+    opacity: 1;
+    filter: brightness(1.2);
+  }
+  .footer-mobile .footer-actions .btn-footer {
+    /* 🔹 SELECCIONADO + PRESIONADO */
+  }
+  .footer-mobile .footer-actions .btn-footer.active:active {
+    background-color: #1A81B9;
+    border-color: #89D5F7;
+  }
+  .footer-mobile .footer-actions .btn-footer img {
+    height: 22px;
+    width: auto;
+  }
+}
+.members-select {
+  height: 120px;
+  overflow-y: auto;
 }/*# sourceMappingURL=home.css.map */

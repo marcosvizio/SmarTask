@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmarTask - Profile</title>
+    <link rel="stylesheet" href="../css/profile.css">
+    <link rel="icon" type="image/png" href="../img/logo_smartask_blanco.png">
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="encabezado">
+        <div class="logo-contenedor">
+            <img src="../img/smartask_logo.png" alt="Logo" class="logo">
+            <span class="titulo"><a href="/home">SmarTask</a></span>
+        </div>
+        <div class="perfil">
+            <img src="../img/icono_perfil.jpg" alt="Perfil" class="icono-perfil">
+            <div class="dropdown-menu">
+                <a href="/profile">Mi Perfil</a>
+                <button id="logoutBtn">Cerrar sesión</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+
+        <div>
+            <button class="btn-atras" id="btn-atras">Atras</button>
+        </div>
+
+        <div class="profile-container">
+
+            <h2>Mi Perfil</h2>
+            <form id="profileForm">
+
+                <div class="form-group">
+                    <label>Nombre</label>
+                    <input type="text" name="first_name" id="first_name" />
+                </div>
+
+                <div class="form-group">
+                    <label>Apellido</label>
+                    <input type="text" name="last_name" id="last_name" />
+                </div>
+
+                <div class="form-group">
+                    <label>Fecha de Nacimiento</label>
+                    <input type="date" name="birthday" id="birthday" />
+                </div>
+
+                <div class="form-group">
+                    <label>Correo Electronico</label>
+                    <input type="email" name="email" id="email" />
+                </div>
+
+                <div class="form-group">
+                    <label>Contraseña</label>
+                    <input type="password" name="password" id="password" />
+                </div>
+
+                <div class="form-group">
+                    <label>Teléfono</label>
+                    <input type="tel" name="phone_number" id="phone_number" />
+                </div>
+
+                <button type="submit">Guardar cambios</button>
+
+            </form>
+
+        </div>
+
+        <div>
+        </div>
+
+    </main>
+
+    <script type="module" src="../js/profile.js" defer></script>
+</body>
+</html>

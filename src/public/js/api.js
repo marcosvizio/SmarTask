@@ -30,20 +30,30 @@ export async function api(path, { method='GET', headers={}, body } = {}) {
   }
 }
 
-// === LOGIN Y REGISTER ===
+// === USERS ===
 export const login = (email, password) => api('/api/users/login', { method: 'POST', body: { email, password } });
-export const register = (first_name, last_name, birthday, email, phone_number, password) => api('/api/users/register', { method: 'POST', body: { first_name, last_name, birthday, email, phone_number, password } });
-export const me = () => api('/api/users/me');
+export const register = (first_name, last_name, birthday, email, phone_number, password) => api('/api/users/register', { method: 'POST', body: { first_name, last_name, birthday, email, phone_number, password }});
+export const password = (email, password) => api('/api/users/password', { method: 'POST', body: { email, password } });
+export const me_profile = () => api('/api/users/me_profile');
+export const update = (first_name, last_name, birthday, email, phone_number, password) => api('/api/users/update', { method: 'PUT', body: { first_name, last_name, birthday, email, phone_number, password }});
+export const getUsersHome = () => api('/api/users');
 
 // === TASKS ===
 export const listTasks = () => api('/api/tasks/');
-export const createTask = (title, description, fecha_inicio, fecha_vencimiento, prioridad) => api('/api/tasks/', { method: 'POST', body: { title, description, fecha_inicio, fecha_vencimiento, prioridad } });
+export const createTask = (title, members, description, fecha_inicio, fecha_vencimiento, prioridad) => api('/api/tasks/', { method: 'POST', body: { title, members, description, fecha_inicio, fecha_vencimiento, prioridad } });
 export const updateTask = (id, patch) => api(`/api/tasks/${id}`, { method: 'PUT', body: patch });
 export const deleteTask = (id) => api(`/api/tasks/${id}`, { method: 'DELETE' });
 
 // === NOTIFICATIONS ===
+export const listNotifications = () => api('/api/notifications/');
 export const getNotification = (taskId) => api(`/api/notifications/${taskId}`, {method: 'GET'});
-export const createNotification = (taskId, asunto, mensaje, fecha_envio, canal) => api(`/api/notifications/`, {method: 'POST', body: {taskId, asunto, mensaje, fecha_envio, canal}});
-
-export const updateNotification = (taskId, {asunto, mensaje, fecha_envio, canal}) => api(`/api/notifications/${taskId}`, {method: 'POST', body: {asunto, mensaje, fecha_envio, canal} });
+export const createNotification = (taskId, asunto, mensaje, fecha_envio) => api(`/api/notifications`, {method: 'POST', body: {taskId, asunto, mensaje, fecha_envio}});
+export const updateNotification = (taskId, {asunto, mensaje, fecha_envio}) => api(`/api/notifications/${taskId}`, {method: 'PUT', body: {asunto, mensaje, fecha_envio}});
 export const deleteNotification = (taskId) => api(`/api/notifications/${taskId}`, {method: 'DELETE'})
+
+// === ADMIN ===
+export const getUsers = () => api('/api/admin/users');
+export const updateUser = (id, {first_name, last_name, birthday, email, phone_number, password }) => api(`/api/admin/user/${id}`, { method: 'PUT', body: { first_name, last_name, birthday, email, phone_number, password }});
+export const deleteUser = (id) => api(`/api/admin/user/${id}`, {method: 'DELETE'})
+export const deleteTaskAdmin = (id) => api(`/api/admin/task/${id}`, {method: 'DELETE'})
+export const deleteNotificationAdmin = (id) => api(`/api/admin/notification/${id}`, {method: 'DELETE'})

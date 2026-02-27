@@ -3,18 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home SmarTask</title>
+    <title>SmarTask - Home</title>
     <link rel="stylesheet" href="../css/home.css">
+    <link rel="icon" type="image/png" href="../img/logo_smartask_blanco.png">
 </head>
 <body>
   <!-- HEADER -->
   <header class="encabezado">
     <div class="logo-contenedor">
       <img src="../img/smartask_logo.png" alt="Logo" class="logo">
-      <span class="titulo">SmarTask</span>
+      <span class="titulo"><a href="/home">SmarTask</a></span>
     </div>
     <div class="perfil">
       <img src="../img/icono_perfil.jpg" alt="Perfil" class="icono-perfil">
+      <div class="dropdown-menu">
+        <div class="datos">
+          <span class="nombre" id="userName"></span>
+          <span class="mail" id="userEmail"></span>
+        </div>
+        <a href="/login" target="_blank">Cambiar de Cuenta</a>
+        <a href="/profile">Ajustes de Cuenta</a>
+        <hr class="divider">
+        <button id="logoutBtn">Cerrar sesión</button>
+      </div>
     </div>
   </header>
     
@@ -28,16 +39,12 @@
       <div id="notif-list" class="noti">
       </div>
 
-      <div class="botones">
-        <button class="btn limpiar">Limpiar</button>
-        <button class="btn anteriores">Anteriores</button>
-      </div>
-
     </section>
 
     <!-- CONTENEDOR CALENDARIO -->
     <section id="sec-calendario" class="calendario hidden">
       <h2>CALENDARIO</h2>
+      <div id="calendar"></div>
     </section>
 
     <!-- CONTENEDOR TABLERO -->
@@ -53,7 +60,7 @@
           <div class="modal-content">
             <header class="modal-head">
               <h3 id="taskTitleLabel">Nueva tarea</h3>
-              <button id="closeModal" class="close" aria-label="Cerrar">×</button>
+              <button id="closeModal" class="close" aria-label="Cerrar">✕</button>
             </header>
 
             <form id="taskForm" class="modal-content_form">
@@ -67,6 +74,12 @@
                 Descripción
                 <textarea name="description" id="taskDesc" rows="3" placeholder="Detalles breves…"></textarea>
               </label>
+
+              <label>Miembros
+                <input type="text" id="memberSearch" placeholder="Buscar usuario..." class="input">
+                <select id="taskMembers" multiple class="input members-select"></select>
+              </label>
+              
 
               <label>
                 Fecha de inicio
@@ -89,8 +102,8 @@
               </label>
 
               <div class="modal-content_form-actions">
-                <button type="button" id="cancelModal" class="btn secondary">Cancelar</button>
                 <button type="submit" class="btn primary">Guardar</button>
+                <button type="button" id="cancelModal" class="btn secondary">Cancelar</button>
               </div>
 
             </form>
@@ -100,46 +113,40 @@
       <!-- FIN MODAL TAREA -->
 
       <!-- MODAL NOTIFICACION -->
-      <div id="notif-modal" class="modal hidden">
-        <div class="modal-dialog">
-          <div class="modal-header">
-            <h3>Configurar notificación</h3>
-            <button id="notif-close" class="icon-btn" aria-label="Cerrar">✕</button>
-          </div>
-
-          <form id="notif-form">
-            <input type="hidden" name="taskId" id="notif-taskId">
-
-            <label class="field">
-              <span>Asunto</span>
-              <input type="text" id="notif-asunto" name="asunto" required>
-            </label>
-
-            <label class="field">
-              <span>Mensaje</span>
-              <textarea id="notif-mensaje" name="mensaje" rows="3" required></textarea>
-            </label>
-
-            <label class="field">
-              <span>Fecha de envío</span>
-              <!-- datetime-local espera hora local -->
-              <input type="datetime-local" id="notif-fecha" name="fecha_envio" required>
-            </label>
-
-            <label class="field">
-              <span>Canal</span>
-              <select id="notif-canal" name="canal">
-                <option value="APP">APP</option>
-                <option value="EMAIL">EMAIL</option>
-                <option value="PUSH">PUSH</option>
-              </select>
-            </label>
-
-            <div class="modal-actions">
-              <button type="submit" class="btn primary">Guardar</button>
-              <button type="button" id="notif-delete" class="btn danger">Eliminar</button>
+      <div class="tablero-header">
+        <div id="notif-modal" class="modal hidden">
+          <div class="modal-backdrop"></div>
+          <div class="modal-content">
+            <div class="modal-head">
+              <h3>Configurar notificación</h3>
+              <button id="notif-close" class="close" aria-label="Cerrar">✕</button>
             </div>
-          </form>
+
+            <form id="notif-form" class="modal-content_form">
+              <input type="hidden" name="taskId" id="notif-taskId">
+
+              <label>
+                <span>Asunto</span>
+                <input type="text" id="notif-asunto" name="asunto" required>
+              </label>
+
+              <label>
+                <span>Mensaje</span>
+                <textarea id="notif-mensaje" name="mensaje" rows="3" required></textarea>
+              </label>
+
+              <label>
+                <span>Fecha de envío</span>
+                <input type="datetime-local" id="notif-fecha" name="fecha_envio" required>
+              </label>
+
+              <div class="modal-content_form-actions">
+                  <button type="submit" class="btn primary">Guardar</button>
+                  <button type="button" id="cancelModalNotif" class="btn secondary">Cancelar</button>
+              </div>
+              
+            </form>
+          </div>
         </div>
       </div>
       <!-- FIN MODAL NOTIFICACION -->
@@ -155,8 +162,8 @@
   </main>
 
 
-  <!-- PESTAÑAS TABLERO NOTIFICACIONES CALENDARIO -->
-  <footer class="footer">
+  <!-- FOOTER DESKTOP -->
+  <footer class="footer-desktop">
         <nav class="footer-actions">
             <button id="btn-noti" class="btn-footer">Notificaciones</button>
             <button id="btn-calend" class="btn-footer">Calendario</button>
@@ -164,8 +171,137 @@
         </nav>
   </footer>
 
+  <!-- FOOTER MOBILE -->
+   <footer class="footer-mobile">
+        <nav class="footer-actions">
+            <button id="btn-noti_mobile" class="btn-footer"><img src="../img/icon_notificaciones.png" alt="Notificaciones"></button>
+            <button id="btn-calend_mobile" class="btn-footer"><img src="../img/icon_calendario.png" alt="Calendario"></button>
+            <button id="btn-tablero_mobile" class="btn-footer"><img src="../img/icon_tareas.png" alt="Tablero"></button>
+        </nav>
+  </footer>
 
 
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+      const calendarEl = document.getElementById('calendar')
+
+      const calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',
+        height: 650,
+
+        events: async function(fetchInfo, successCallback, failureCallback) {
+          try {
+
+            const token = localStorage.getItem('token')
+
+            // =========================
+            // EVENTOS GOOGLE
+            // =========================
+            const googleResponse = await fetch('/auth/calendar', {
+              headers: {
+                Authorization: `Bearer ${token}`
+              }
+            })
+
+            const googleData = await googleResponse.json()
+
+            const googleEvents = (googleData.items || []).map(event => ({
+              title: event.summary,
+              start: event.start?.dateTime || event.start?.date,
+              end: event.end?.dateTime || event.end?.date,
+              backgroundColor: '#4285F4'
+            }))
+
+
+            // =========================
+            // TAREAS
+            // =========================
+            const taskResponse = await fetch('/api/tasks', {
+              headers: {
+                Authorization: `Bearer ${token}`
+              }
+            })
+
+            const tasks = await taskResponse.json()
+
+            // =========================
+            // 3️⃣ NOTIFICACIONES
+            // =========================
+            const notificationResponse = await fetch('/api/notifications', {
+              headers: {
+                Authorization: `Bearer ${token}`
+              }
+            })
+
+            const notifications = await notificationResponse.json()
+
+            const today = new Date().toISOString().split('T')[0]
+
+
+            // =========================
+            // Eventos de tarea
+            // =========================
+
+            const taskEvents = tasks.map(task => {
+              let color;
+
+              if (task.fecha_vencimiento < today) {
+                color = '#7f8c8d'; // vencida
+              } else if (task.prioridad === 'Alta') {
+                color = '#e74c3c';
+              } else if (task.prioridad === 'Media') {
+                color = '#f1c40f';
+              } else {
+                color = '#2ecc71';
+              }
+
+              return {
+                title: `${task.title}`,
+                start: task.fecha_vencimiento, // ya es YYYY-MM-DD
+                allDay: true,
+                backgroundColor: color
+              };
+            });
+
+            // =========================
+            // Eventos de notificación
+            // =========================
+            notifications
+              .filter(n => !n.cancelada)
+              .forEach(notification => {
+
+                const task = tasks.find(t => t.taskId === notification.taskId)
+
+                if (!task) return
+
+                taskEvents.push({
+                  title: `🔔 ${task.title}`,
+                  start: notification.fecha_envio,
+                  allDay: false,
+                  backgroundColor: '#8e44ad'
+                })
+
+            })
+
+            const allEvents = [...googleEvents, ...taskEvents]
+
+            successCallback(allEvents)
+
+          } catch (error) {
+            console.error(error)
+            failureCallback(error)
+          }
+        }
+      })
+
+      calendar.render()
+    })
+  </script>
+
+  <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
   <script type="module" src="../js/home.js" defer></script>
+  <script src="https://apis.google.com/js/api.js"></script>
 </body>
 </html>

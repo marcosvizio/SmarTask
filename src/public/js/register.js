@@ -18,6 +18,26 @@ form.addEventListener('submit', async (e) => {
     setToken(data.token);
     location.href = '/home';
   } catch (err) {
-    msg.textContent = err;
+    mostrarPopup();
+  }
+});
+
+const popup = document.getElementById("errorPopup");
+const cerrarBtn = document.getElementById("cerrarBtn");
+
+function mostrarPopup() {
+  popup.style.display = "flex";
+}
+
+function cerrarPopup() {
+  popup.style.display = "none";
+}
+
+// conectar el botón con la función
+cerrarBtn.addEventListener("click", cerrarPopup);
+
+popup.addEventListener("click", function(e) {
+  if (e.target === popup) {
+    cerrarPopup();
   }
 });

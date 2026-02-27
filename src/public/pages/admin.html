@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmarTask - Admin</title>
+    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="icon" type="image/png" href="../img/logo_smartask_blanco.png">
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="encabezado">
+        <div class="logo-contenedor">
+            <img src="../img/smartask_logo.png" alt="Logo" class="logo">
+            <span class="titulo"><a href="/home">SmarTask</a></span>
+        </div>
+        <div class="perfil">
+            <img src="../img/icono_perfil.jpg" alt="Perfil" class="icono-perfil">
+            <div class="dropdown-menu">
+                <button id="logoutBtn">Cerrar sesión</button>
+            </div>
+        </div>
+    </header>
+
+
+    <div id="adminContainer"></div>
+    <!-- MODAL -->
+    <div id="editModal" class="modal hidden">
+        <div class="modal-content"> 
+            <form id="editUserForm">
+                <button type="button" id="closeModal">X</button>
+                <br>
+                <label>Nombre</label>
+                <input type="text" id="first_name" name="first_name" />
+                <label>Apellido</label>
+                <input type="text" id="last_name" name="last_name" />
+                <label>Email</label>
+                <input type="email" id="email" name="email" />
+                <label>Fecha de nacimiento</label>
+                <input type="date" id="birthday" name="birthday" />
+                <label>Número de teléfono</label>
+                <input type="text" id="phone_number" name="phone_number" />
+                <label>Contraseña</label>
+                <input type="password" id="password" name="password" />
+                <br>
+                <br>
+                <button type="submit">Guardar</button>
+            </form>
+            <p id="formError" style="color:red;"></p>
+        </div>
+    </div>
+
+    <script type="module" src="../js/admin.js" defer></script>
+</body>
+</html>

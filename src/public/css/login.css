@@ -1,3 +1,4 @@
+@charset "UTF-8";
 * {
   margin: 0;
   padding: 0;
@@ -113,6 +114,18 @@
   background-size: cover;
 }
 
+@media (max-width: 480px) {
+  .form {
+    flex-direction: column;
+  }
+  .form .form-log {
+    width: 100%;
+    padding: 2rem;
+  }
+  .form .img-log {
+    display: none;
+  }
+}
 input[type=email] {
   width: 100%;
   padding: 0.7rem;
@@ -163,4 +176,69 @@ input[type=tel] {
   margin-bottom: 1rem;
   color: red;
   font-size: 0.9rem;
+}
+
+/* Fondo oscuro con blur */
+.popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.55);
+  backdrop-filter: blur(6px);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  animation: fadeIn 0.3s ease;
+}
+
+/* Caja del popup */
+.popup-content {
+  background: #ffffff;
+  padding: 35px 40px;
+  border-radius: 16px;
+  width: 320px;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  transform: scale(0.9);
+  animation: popIn 0.25s ease forwards;
+}
+
+/* Texto */
+.popup-content p {
+  font-size: 16px;
+  color: #1e293b;
+  margin-bottom: 25px;
+  font-weight: 500;
+}
+
+/* Botón */
+.popup-content button {
+  background: linear-gradient(135deg, #4a3aff, #6d5dfc);
+  border: none;
+  padding: 10px 22px;
+  border-radius: 8px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.popup-content button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(74, 58, 255, 0.4);
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes popIn {
+  to {
+    transform: scale(1);
+  }
 }/*# sourceMappingURL=login.css.map */

@@ -1,5 +1,5 @@
 // public/js/login.js
-import { login, setToken } from '/js/api.js';
+import { login, setToken } from './api.js';
 
 const form = document.querySelector('form');
 const msg  = document.getElementById('msg');
@@ -10,11 +10,39 @@ form.addEventListener('submit', async (e) => {
   const email = form.email.value.trim().toLowerCase();
   const password = form.password.value;
 
+
   try {
     const data = await login(email, password);
     setToken(data.token);
-    location.href = '/home'; 
+
+    if (data.user.role == 'admin') {
+      location.href = '/admin';
+    } else {
+      location.href = '/home';
+    }
+
   } catch (err) {
-    msg.textContent = 'Credenciales inválidas';
+      mostrarPopup();
+    }
+  }
+);
+
+const popup = document.getElementById("errorPopup");
+const cerrarBtn = document.getElementById("cerrarBtn");
+
+function mostrarPopup() {
+  popup.style.display = "flex";
+}
+
+function cerrarPopup() {
+  popup.style.display = "none";
+}
+
+// conectar el botón con la función
+cerrarBtn.addEventListener("click", cerrarPopup);
+
+popup.addEventListener("click", function(e) {
+  if (e.target === popup) {
+    cerrarPopup();
   }
 });

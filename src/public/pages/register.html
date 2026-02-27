@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="./css/login.css">
     <!-- GOOGLE FONT -->
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="../img/logo_smartask_blanco.png">
 </head>
 <body>
     <div class="form">
@@ -18,7 +19,7 @@
             
                 <button class="btn btn-google">
                     <img src="https://www.svgrepo.com/show/475656/google-color.svg" alt="Google" width="18px">
-                    Continuar con Google
+                    <a href="/auth/google">Continuar con Google</a>
                 </button>
 
                 <div class="separator">
@@ -48,6 +49,13 @@
         </div>
         <!-- IMAGEN MITAD -->
         <div class="img-log"></div>
+    </div>
+
+    <div id="errorPopup" class="popup">
+        <div class="popup-content">
+            <p>Credenciales incorrectas</p>
+            <button id="cerrarBtn" onclick="cerrarPopup()">Cerrar</button>
+        </div>
     </div>
     <script type="module" src="../js/register.js"></script>
 </body>

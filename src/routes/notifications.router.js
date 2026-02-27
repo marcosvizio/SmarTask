@@ -5,25 +5,29 @@ import {
   cancelarNotificacion,
   getNotificacionByTask,
   venceProntoNotificacion,
-  recordatorioNotificacion
-} from '../dao/manager/notificationManager.js';
+  recordatorioNotificacion,
+  listNotificationsByUser
+} from '../dao/db/notificationRepository.js';
+
 
 const router = Router();
+
 
 // Todas las rutas de /api/notifications requieren estar logueado
 router.use(auth);
 
-/* GET /api/notifications/:taskId → Devuelve la notificación asociada a una tarea */
-router.get('/:taskId', async (req, res) => {
-    try {
-        const notif = getNotificacionByTask(req.params.taskId);
 
-        if (!notif) return res.status(404).json({ error: 'No existe notificación para esa tarea' });
-
-        res.json(notif);
-    } catch (err) {
-        res.status(500).json({ error: err.message });
-    }
+/* GET /api/notifications/ → Devuelve todas las notificaciones del usuario */
+router.get('/', async (req, res) => {
+  try {
+    const userId = req.user.sub;
+    
+    const notifications = await listNotificationsByUser(userId);
+    
+    res.status(200).json(notifications)
+  } catch (error) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
 
@@ -59,6 +63,21 @@ router.post('/', async (req, res) => {
 });
 
 
+
+/* GET /api/notifications/:taskId → Devuelve la notificación asociada a una tarea */
+router.get('/:taskId', async (req, res) => {
+    try {
+        const notif = await getNotificacionByTask(req.params.taskId);
+        
+        if (!notif) return res.status(404).json({ error: 'No existe notificación para esa tarea' });
+
+        res.json(notif);
+    } catch (err) {
+        res.status(500).json({ error: err.message });
+    }
+});
+
+
 /* PUT /api/notifications/:taskId → Reprograma (actualiza) una notificación existente */
 router.put('/:taskId', async (req, res) => {
   try {
@@ -87,5 +106,6 @@ router.delete('/:taskId', async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
 
 export default router;

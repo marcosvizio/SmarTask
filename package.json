@@ -13,12 +13,24 @@
   "license": "ISC",
   "type": "module",
   "dependencies": {
+    "@fullcalendar/core": "^6.1.20",
+    "@fullcalendar/daygrid": "^6.1.20",
+    "@fullcalendar/interaction": "^6.1.20",
+    "@fullcalendar/timegrid": "^6.1.20",
     "bcrypt": "^6.0.0",
     "cookie-parser": "^1.4.7",
-    "cors": "^2.8.5",
+    "cors": "^2.8.6",
     "dotenv": "^17.2.2",
     "express": "^5.1.0",
-    "jsonwebtoken": "^9.0.2"
+    "express-session": "^1.19.0",
+    "jsonwebtoken": "^9.0.2",
+    "msnodesqlv8": "^5.1.5",
+    "mssql": "^10.0.4",
+    "node-cron": "^4.2.1",
+    "nodemailer": "^8.0.1",
+    "passport": "^0.7.0",
+    "passport-google-oauth20": "^2.0.0",
+    "tslib": "^2.8.1"
   },
   "devDependencies": {
     "jest": "^30.2.0",
